@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">🍏 MLX - ResNet 🍏</h1>
 
-ResNet implementation with the [MLX](https://github.com/ml-explore/mlx), Apple's deep learning framework. 
+ResNet implementation with the [MLX](https://github.com/ml-explore/mlx), Apple's deep learning framework.
 
 Drop a ⭐️!!
 
@@ -46,7 +46,7 @@ Epoch 4: Test accuracy 0.932
 
 * `dilation` and `groups` features in convolutional layers is missing ([issue](https://github.com/ml-explore/mlx/issues/100) created). More recent ResNet requires this parameters.
 * Batch norm is also missing.
-* No pretrained weights. 
+* No pretrained weights.
 
 # Contribute
 

@@ -1,19 +1,19 @@
 """This code was taken from mlx-examples repository:
+
 https://github.com/ml-explore/mlx-examples/blob/main/mnist/mnist.py
 """
 # Copyright © 2023 Apple Inc.
 
 import gzip
-import numpy as np
 import os
 import pickle
 from urllib import request
 
+import numpy as np
+
 
 def mnist(save_dir="/tmp"):
-    """
-    Load the MNIST dataset in 4 tensors: train images, train labels,
-    test images, and test labels.
+    """Load the MNIST dataset in 4 tensors: train images, train labels, test images, and test labels.
 
     Checks `save_dir` for already downloaded data otherwise downloads.
 
@@ -37,9 +37,7 @@ def mnist(save_dir="/tmp"):
         for name in filename[:2]:
             out_file = os.path.join("/tmp", name[1])
             with gzip.open(out_file, "rb") as f:
-                mnist[name[0]] = np.frombuffer(f.read(), np.uint8, offset=16).reshape(
-                    -1, 28 * 28
-                )
+                mnist[name[0]] = np.frombuffer(f.read(), np.uint8, offset=16).reshape(-1, 28 * 28)
         for name in filename[-2:]:
             out_file = os.path.join("/tmp", name[1])
             with gzip.open(out_file, "rb") as f:
@@ -53,7 +51,9 @@ def mnist(save_dir="/tmp"):
     with open(save_file, "rb") as f:
         mnist = pickle.load(f)
 
-    preproc = lambda x: (x.astype(np.float32) / 255.0).reshape(-1, 28, 28, 1)
+    def preproc(x):
+        return (x.astype(np.float32) / 255.0).reshape(-1, 28, 28, 1)
+
     mnist["training_images"] = preproc(mnist["training_images"])
     mnist["test_images"] = preproc(mnist["test_images"])
     return (

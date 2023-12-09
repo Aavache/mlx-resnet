@@ -1,6 +1,5 @@
-"""This ResNet implementation is based on the one in torchvision"""
+"""This ResNet implementation is based on the one in torchvision."""
 import mlx.nn as nn
-
 
 from layers import flatten, global_avg_pool2d, max_pool2d
 
@@ -15,7 +14,7 @@ __all__ = [
 
 
 def conv3x3(in_planes, out_planes, stride=1, padding=1):
-    """3x3 convolution with padding"""
+    """3x3 convolution with padding."""
     return nn.Conv2d(
         in_planes,
         out_planes,
@@ -27,7 +26,7 @@ def conv3x3(in_planes, out_planes, stride=1, padding=1):
 
 
 def conv1x1(in_planes, out_planes, stride=1):
-    """1x1 convolution"""
+    """1x1 convolution."""
     return nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
 
 
@@ -38,11 +37,11 @@ class BasicBlock(nn.Module):
         self,
         inplanes,
         planes,
-        stride = 1,
-        downsample = None,
+        stride=1,
+        downsample=None,
     ) -> None:
         super().__init__()
-        norm_layer = nn.LayerNorm    
+        norm_layer = nn.LayerNorm
 
         self.conv1 = conv3x3(inplanes, planes, stride)
         self.bn1 = norm_layer(planes)
@@ -84,8 +83,8 @@ class Bottleneck(nn.Module):
         self,
         inplanes,
         planes,
-        stride = 1,
-        downsample = None,
+        stride=1,
+        downsample=None,
     ):
         super().__init__()
         width = planes
@@ -152,7 +151,7 @@ class ResNet(nn.Module):
         block,
         planes,
         blocks,
-        stride = 1,
+        stride=1,
     ):
         norm_layer = self._norm_layer
         downsample = None
@@ -195,30 +194,25 @@ def _resnet(block, layers, **kwargs):
 
 
 def resnet18(*args, **kwargs):
-    """ResNet-18 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__.
-    """
+    """ResNet-18 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__."""
     return _resnet(BasicBlock, [2, 2, 2, 2], *args, **kwargs)
 
 
 def resnet34(*args, **kwargs):
-    """ResNet-34 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__.
-    """
+    """ResNet-34 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__."""
     return _resnet(BasicBlock, [3, 4, 6, 3], *args, **kwargs)
 
 
 def resnet50(*args, **kwargs):
-    """ResNet-50 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__.
-    """
+    """ResNet-50 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__."""
     return _resnet(Bottleneck, [3, 4, 6, 3], *args, **kwargs)
 
 
 def resnet101(*args, **kwargs):
-    """ResNet-101 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__.
-    """
+    """ResNet-101 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__."""
     return _resnet(Bottleneck, [3, 4, 23, 3], *args, **kwargs)
 
 
 def resnet152(*args, **kwargs):
-    """ResNet-152 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__.
-    """
+    """ResNet-152 from `Deep Residual Learning for Image Recognition <https://arxiv.org/abs/1512.03385>`__."""
     return _resnet(Bottleneck, [3, 8, 36, 3], *args, **kwargs)

@@ -1,13 +1,12 @@
-"""Training ResNet on CIFAR-10 dataset."""
+"""Training ResNet on MNIST dataset."""
 import mlx.core as mx
 import mlx.nn as nn
 import mlx.optimizers as optim
-
 import numpy as np
 
 import mnist as mnist
-from layers import upsample_nearest
 import resnet
+from layers import upsample_nearest
 
 NUMBER_OF_CLASSES = 10
 NUMBER_OF_EPOCHS = 10
@@ -19,7 +18,7 @@ def convert_to_3_channels(x):
     return mx.concatenate([x, x, x], axis=3)
 
 
-def batch_iterate(batch_size, X, y,shuffle=True):
+def batch_iterate(batch_size, X, y, shuffle=True):
     perm = mx.array(np.random.permutation(y.size)) if shuffle else mx.arange(y.size)
     for s in range(0, y.size, batch_size):
         ids = perm[s : s + batch_size]
@@ -32,9 +31,7 @@ def loss_fn(model, X, y):
 
 def train():
     # Load the data
-    train_images, train_labels, test_images, test_labels = map(
-        mx.array, mnist.mnist()
-    )
+    train_images, train_labels, test_images, test_labels = map(mx.array, mnist.mnist())
 
     model = resnet.resnet18(num_classes=NUMBER_OF_CLASSES)
     mx.eval(model.parameters())
