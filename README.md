@@ -4,7 +4,7 @@ ResNet implementation with the [MLX](https://github.com/ml-explore/mlx), Apple's
 
 Drop a ⭐️!!
 
-# MNIST with ResNet18
+## MNIST with ResNet18
 
 Here the logs when training with ResNet18 (no tuning at all) for couple epochs:
 
@@ -42,12 +42,12 @@ Epoch 4: Test accuracy 0.932
 ```
 
 
-# Future updates
+## Future updates
 
 * `dilation` and `groups` features in convolutional layers is missing ([issue](https://github.com/ml-explore/mlx/issues/100) created). More recent ResNet requires this parameters.
 * Batch norm is also missing.
 * No pretrained weights.
 
-# Contribute
+## Contribute
 
 Feel free to create issues and PRs :)
